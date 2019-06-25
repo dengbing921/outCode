@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: framework-gateway
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+        query-passing: true
+        preferIpAddress: true

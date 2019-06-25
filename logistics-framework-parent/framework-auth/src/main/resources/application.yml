@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: dev
+feign:
+  permissionService: adyl-logistics-tms
+  userService: adyl-logistics-tms
+  messageService: adyl-logistics-message
+  platformService: adyl-logistics-platform
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000

@@ -1,0 +1,13 @@
+#端口号设置
+server:
+  port: 9004
+
+fastdfs:
+  connectTimeout: 10
+  networkTimeout: 30
+  charset: UTF-8
+  trackerServers: 192.168.1.36:22122
+  trackerHttpPort: 8889
+  antiStealToken: true
+  secretKey: FastDFS1234567890
+  httpPrefix: http://192.168.1.36/

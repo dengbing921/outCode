@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adyl.logistics.framework.gateway.dao.IApiRouteDao">
+    <!--定义一个ResultMap映射-->
+    <resultMap id="ApiRouteMap" type="ApiRoute">
+        <id column="id" jdbcType="VARCHAR" property="id"></id>
+        <result column="path" jdbcType="VARCHAR" property="path"></result>
+        <result column="service_id" jdbcType="VARCHAR" property="serviceId"></result>
+        <result column="url" jdbcType="VARCHAR" property="url"></result>
+        <result column="retryable" jdbcType="TINYINT" property="retryable"></result>
+        <result column="enabled" jdbcType="TINYINT" property="enabled"></result>
+        <result column="strip_prefix" jdbcType="INTEGER" property="stripPrefix"></result>
+        <result column="api_name" jdbcType="VARCHAR" property="apiName"></result>
+    </resultMap>
+    <resultMap id="IgnoreUrlMap" type="com.adyl.logistics.framework.gateway.entity.IgnoreUrl">
+        <id column="ignore_id" jdbcType="INTEGER" property="ignoreId"/>
+        <result column="ignore_url" jdbcType="VARCHAR" property="ignoreUrl"/>
+        <result column="ignore_type" jdbcType="VARCHAR" property="ignoreType"/>
+    </resultMap>
+
+    <!--查询所有路由配置-->
+    <select id="getApiRoutes" resultMap="ApiRouteMap">
+      select id,path,service_id,url,retryable,enabled,strip_prefix,api_name from t_gateway_apiroute
+    </select>
+
+    <!--查询例外URL-->
+    <select id="getIgnoreUrls" parameterType="com.adyl.logistics.framework.gateway.entity.IgnoreUrl" resultMap="IgnoreUrlMap">
+        select ignore_id, ignore_url,ignore_type from t_gateway_ignore
+        <where>
+            <if test="ignoreType != null">
+                instr(ignore_type, #{ignoreType}) > 0
+            </if>
+        </where>
+    </select>
+</mapper>

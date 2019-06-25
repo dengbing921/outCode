@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adyl.logistics.platform.auth.client.IClientDetailsDao">
+    <!--定义一个ResultMap映射-->
+    <resultMap id="CustomClientDetailsMap" type="CustomClientDetails">
+        <result column="app_appid" jdbcType="VARCHAR" property="clientId"></result>
+        <result column="app_appsecret" jdbcType="VARCHAR" property="clientSecret"></result>
+    </resultMap>
+
+    <!--查询所有路由配置-->
+    <select id="getClientByClientId" parameterType="String" resultMap="CustomClientDetailsMap">
+      select app_appid, app_appsecret from t_platform_app where app_appid = #{clientId}
+    </select>
+</mapper>
